@@ -16,22 +16,18 @@
 </head>
 <body>
     <h1>Photo Resize and Crop</h1>
-
     <div class="image-container">
         <img id="image" src="{{ photo.original_image.url }}" alt="Original Image">
     </div>
-
     <div class="button-container">
         <button id="crop-button">Crop Image</button>
     </div>
-
     <div>
         <h2>Cropped Image:</h2>
         <canvas id="cropped-canvas"></canvas>
         <br>
         <a id="download-cropped" href="#" download="cropped_image.jpg" style="display:none;">Download Cropped Image</a>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
     <script>
         // Initialize Cropper.js
@@ -40,22 +36,18 @@
             aspectRatio: NaN, // Free-hand cropping
             viewMode: 1
         });
-
         // Handle crop action
         const cropButton = document.getElementById('crop-button');
         const croppedCanvas = document.getElementById('cropped-canvas');
         const downloadLink = document.getElementById('download-cropped');
-
         cropButton.addEventListener('click', () => {
             // Get cropped canvas
             const canvas = cropper.getCroppedCanvas();
-
             // Display cropped image
             const context = croppedCanvas.getContext('2d');
             croppedCanvas.width = canvas.width;
             croppedCanvas.height = canvas.height;
             context.drawImage(canvas, 0, 0);
-
             // Generate download link for cropped image
             canvas.toBlob((blob) => {
                 const url = URL.createObjectURL(blob);

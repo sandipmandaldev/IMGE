@@ -11,23 +11,19 @@
             margin: 0;
             padding: 0;
         }
-
         .container {
             padding: 20px;
         }
-
         canvas {
             border: 1px solid #ccc;
             margin-bottom: 20px;
         }
-
         .controls {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
         }
-
         button, select, input {
             padding: 10px 20px;
             border: none;
@@ -36,11 +32,9 @@
             color: white;
             cursor: pointer;
         }
-
         button:hover, select:hover, input:hover {
             background-color: #45a049;
         }
-
         input[type="number"] {
             width: 80px;
         }
@@ -58,7 +52,6 @@
                 <option value="image/png">PNG</option>
                 <option value="image/jpeg">JPEG</option>
                 <option value="image/pdf">PDF</option>
-
             </select>
             <div>
                 <label for="width">Width:</label>
@@ -72,8 +65,6 @@
             <button id="download-btn">Download</button>
         </div>
     </div>
-
-
     <script>
         const canvas = document.getElementById('image-canvas');
         const ctx = canvas.getContext('2d');
@@ -85,7 +76,6 @@
         const widthInput = document.getElementById('width');
         const heightInput = document.getElementById('height');
         const resizeBtn = document.getElementById('resize-btn');
-
         // Load the processed image into the canvas
         const img = new Image();
         img.src = "{{ image.processed_image.url }}"; // Django template tag for processed image URL
@@ -95,16 +85,13 @@
             ctx.drawImage(img, 0, 0);
             originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         };
-
         // Store the original image for restore functionality
         let originalImageData;
         let currentRotation = 0; // Track rotation in degrees
-
         // Resize functionality
         resizeBtn.addEventListener('click', () => {
             const newWidth = parseInt(widthInput.value);
             const newHeight = parseInt(heightInput.value);
-
             if (newWidth && newHeight) {
                 // Resize canvas to new dimensions
                 canvas.width = newWidth;
@@ -113,7 +100,6 @@
                 ctx.drawImage(img, 0, 0, newWidth, newHeight);
             }
         });
-
         // Erase functionality
         let isErasing = false;
         canvas.addEventListener('mousedown', () => (isErasing = true));
@@ -126,7 +112,6 @@
                 ctx.clearRect(x - 10, y - 10, 20, 20); // Erase a small area around the cursor
             }
         });
-
         // Restore functionality
         restoreBtn.addEventListener('click', () => {
             if (originalImageData) {
@@ -136,25 +121,20 @@
                 currentRotation = 0; // Reset rotation
             }
         });
-
         // Rotate functionality
         rotateBtn.addEventListener('click', () => {
             currentRotation = (currentRotation + 90) % 360;
             const tempCanvas = document.createElement('canvas');
             const tempCtx = tempCanvas.getContext('2d');
-
             tempCanvas.width = canvas.height;
             tempCanvas.height = canvas.width;
-
             tempCtx.translate(tempCanvas.width / 2, tempCanvas.height / 2);
             tempCtx.rotate((currentRotation * Math.PI) / 180);
             tempCtx.drawImage(canvas, -canvas.width / 2, -canvas.height / 2);
-
             canvas.width = tempCanvas.width;
             canvas.height = tempCanvas.height;
             ctx.drawImage(tempCanvas, 0, 0);
         });
-
         // Download functionality
         downloadBtn.addEventListener('click', () => {
             const format = formatSelect.value;

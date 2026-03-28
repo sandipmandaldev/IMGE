@@ -139,7 +139,6 @@
                     <b>DropPhoto</b>
                 </a>
             </div>
-
             <!-- Navigation Links -->
             <div style="display: flex; gap: 20px;">
                 <a href="#" id="signin-link">Sign In</a>
@@ -148,10 +147,8 @@
         </div>
     </nav>
 </header>
-
     <h1>Welcome to DropPhoto</h1>
     <p>Please sign up or sign in to continue.</p>
-
     <div class="form-container">
         <!-- Signup Form -->
         <div class="form-box" id="signup-form">
@@ -162,7 +159,6 @@
                 <button type="submit" name="signup">Sign Up</button>
             </form>
         </div>
-
         <!-- Signin Form -->
         <div class="form-box" id="signin-form">
             <h2>Sign In</h2>
@@ -173,7 +169,6 @@
             </form>
         </div>
     </div>
-
     {% for message in messages %}
         <p style="color: red;">{{ message }}</p>
     {% endfor %}
@@ -196,24 +191,20 @@
             <p style="color: #fff; margin-top: 10px;">CroppingImage</p>
         </div>
     </div>
-
     <footer>
         <p>&copy; 2025 DropPhoto. All Rights Reserved. <a href="#"></a> | <a href="#"></a></p>
     </footer>
-
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const signinLink = document.getElementById("signin-link");
             const signupLink = document.getElementById("signup-link");
             const signinForm = document.getElementById("signin-form");
             const signupForm = document.getElementById("signup-form");
-
             signinLink.addEventListener("click", (e) => {
                 e.preventDefault();
                 signinForm.classList.add("active");
                 signupForm.classList.remove("active");
             });
-
             signupLink.addEventListener("click", (e) => {
                 e.preventDefault();
                 signupForm.classList.add("active");
